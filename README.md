@@ -185,6 +185,15 @@ Users can navigate forward or backward through weeks without limitation.
 - Group information is retrieved from the database when needed rather than stored in callback data
 - Error handling is implemented for invalid callback data and missing groups
 
+## Fix for BUTTON_DATA_INVALID Error
+
+Previously, the navigation buttons used JSON-encoded callback data which could become too long when navigating many weeks forward or backward, causing a "BUTTON_DATA_INVALID" error. This has been fixed by using a shorter callback data format:
+
+- Previous format: `schedule_{"action": "prev", "offset": -1, "current_offset": 0}` (long JSON)
+- New format: `sch_prev:-1:0` (short string format)
+
+This ensures that callback data stays well within Telegram's 64-byte limit, even when navigating many weeks forward or backward.
+
 ## Populating Test Data
 
 To populate the database with test data for development and testing:

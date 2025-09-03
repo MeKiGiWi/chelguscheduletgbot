@@ -11,15 +11,20 @@ router = Router()
 logger = logging.getLogger(__name__)
 
 
-@router.callback_query(F.data.startswith("schedule_"))
+@router.callback_query(F.data.startswith("sch_"))
 async def schedule_navigation_handler(callback: CallbackQuery, db: Database):
     """Handle schedule navigation callbacks"""
     try:
-        # Parse callback data
-        data = json.loads(callback.data[9:])  # Remove "schedule_" prefix
-        action = data.get("action")
-        offset = data.get("offset", 0)
-        current_offset = data.get("current_offset", 0)
+        # Parse callback data (short format to avoid Telegram limits)
+        # Format: sch_action:offset:current_offset
+        parts = callback.data.split(":")
+        if len(parts) != 3:
+            await callback.answer("Invalid callback data", show_alert=True)
+            return
+
+        action = parts[0][4:]  # Remove "sch_" prefix
+        offset = int(parts[1])
+        current_offset = int(parts[2])
 
         # Get the group ID for the default group
         group_id = db.get_or_create_group(DEFAULT_GROUP, "Computer Science")
