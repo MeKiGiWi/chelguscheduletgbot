@@ -105,7 +105,7 @@ def format_schedule_message(
     Returns:
         str: Formatted schedule message
     """
-    # Start with group name as a blockquote
+    # Start with group name as a blockquote (no newline before)
     message = f"<blockquote>{group_name}</blockquote>\n"
 
     # Group lessons by day
@@ -121,7 +121,7 @@ def format_schedule_message(
         day_name = DAYS_OF_WEEK[day_index]
         day_date = week_start + timedelta(days=day_index)
 
-        # Start blockquote for the day with bold day name and date
+        # Start blockquote for the day with bold day name and date (no newline before)
         message += f"<blockquote><b>{day_name} ~ {day_date.strftime('%d.%m')}</b>\n"
 
         # Check if there are lessons for this day
@@ -140,7 +140,7 @@ def format_schedule_message(
             # No lessons for this day
             message += "Выходной\n"
 
-        # Close blockquote for the day
-        message += "</blockquote>\n"
+        # Close blockquote for the day (with newline after, but no extra newlines)
+        message += "</blockquote>"
 
     return message
