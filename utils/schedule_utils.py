@@ -5,15 +5,15 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Days of the week in Russian (abbreviated)
+# Days of the week in Russian (abbreviated, uppercase)
 DAYS_OF_WEEK = [
-    "пн",
-    "вт",
-    "ср",
-    "чт",
-    "пт",
-    "сб",
-    "вс",
+    "Пн",
+    "Вт",
+    "Ср",
+    "Чт",
+    "Пт",
+    "Сб",
+    "Вс",
 ]
 
 
@@ -106,7 +106,7 @@ def format_schedule_message(
         str: Formatted schedule message
     """
     # Start with group name as a blockquote
-    message = f"<blockquote>{group_name}</blockquote>\n\n"
+    message = f"<blockquote>{group_name}</blockquote>\n"
 
     # Group lessons by day
     lessons_by_day = {}
@@ -121,8 +121,8 @@ def format_schedule_message(
         day_name = DAYS_OF_WEEK[day_index]
         day_date = week_start + timedelta(days=day_index)
 
-        # Start blockquote for the day
-        message += f"<blockquote>{day_name[:2]} ~ {day_date.strftime('%d.%m')}\n"
+        # Start blockquote for the day with bold day name and date
+        message += f"<blockquote><b>{day_name} ~ {day_date.strftime('%d.%m')}</b>\n"
 
         # Check if there are lessons for this day
         if day_index in lessons_by_day and lessons_by_day[day_index]:
@@ -138,9 +138,9 @@ def format_schedule_message(
                 message += f"{start_time}-{end_time}   ПЗ   {location}\n"
         else:
             # No lessons for this day
-            message += "Выходной"
+            message += "Выходной\n"
 
         # Close blockquote for the day
-        message += "</blockquote>"
+        message += "</blockquote>\n"
 
     return message

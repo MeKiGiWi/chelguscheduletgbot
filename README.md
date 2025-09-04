@@ -218,34 +218,44 @@ The bot displays schedules in the following format using Telegram blockquotes:
 
 ```
 <blockquote>М8О-207БВ-24</blockquote>
-
-<blockquote>пн ~ 01.09
+<blockquote><b>Пн ~ 01.09</b>
 Физическая культура
 09:00-10:30   ПЗ   --каф. 919
-</blockquote><blockquote>вт ~ 02.09
+</blockquote>
+<blockquote><b>Вт ~ 02.09</b>
 Математический анализ
 10:45-12:15   ПЗ   ГУК В-221
 Иностранный язык
 13:00-14:30   ПЗ   3-403
-</blockquote><blockquote>ср ~ 03.09
+</blockquote>
+<blockquote><b>Ср ~ 03.09</b>
 Общая физика
 13:00-14:30   ПЗ   ГУК Б-638
-</blockquote><blockquote>чт ~ 04.09
+</blockquote>
+<blockquote><b>Чт ~ 04.09</b>
 Программирование
 09:00-10:30   ПЗ   ГУК В-221
-</blockquote><blockquote>пт ~ 05.09
-Выходной</blockquote><blockquote>сб ~ 06.09
-Выходной</blockquote><blockquote>вс ~ 07.09
-Выходной</blockquote>
+</blockquote>
+<blockquote><b>Пт ~ 05.09</b>
+Выходной
+</blockquote>
+<blockquote><b>Сб ~ 06.09</b>
+Выходной
+</blockquote>
+<blockquote><b>Вс ~ 07.09</b>
+Выходной
+</blockquote>
 ```
 
 - Group name is displayed as a separate blockquote at the top
 - Each day's content (header, lessons, and "Выходной") is wrapped in a single blockquote
-- Day names are abbreviated (пн, вт, ср, чт, пт, сб, вс)
+- Day names are abbreviated and capitalized (Пн, Вт, Ср, Чт, Пт, Сб, Вс)
+- Day names and dates are displayed in bold
 - Lessons are formatted with subject, time, "ПЗ" (practice), and location
 - Days with no lessons show "Выходной" (Day off) within the blockquote
 - All 7 days of the week are always displayed
-- No empty lines between blockquotes
+- Each blockquote is separated by a single newline to prevent merging on mobile devices
+- No newlines are added before blockquotes
 </content>
 <line_count>161</line_count>
 </write_to_file
